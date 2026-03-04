@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Trivia Game</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+body{
+font-family:Arial;
+background:#f5f5f5;
+text-align:center;
+padding:40px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+max-width:400px;
+margin:auto;
+}
+
+button{
+padding:10px 15px;
+margin:5px;
+border:none;
+background:#111;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.answer{
+display:block;
+width:100%;
+margin:8px 0;
+background:#eee;
+color:black;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2 id="question">Нажми Start</h2>
+
+<div id="answers"></div>
+
+<button onclick="startGame()">Start</button>
+
+</div>
+
+<script>
+
+let questions=[
+{
+q:"Столица Франции?",
+a:["Берлин","Париж","Рим","Мадрид"],
+c:1
+},
+{
+q:"2 + 2 = ?",
+a:["3","4","5","6"],
+c:1
+},
+{
+q:"Самая большая планета?",
+a:["Земля","Юпитер","Марс","Венера"],
+c:1
+}
+]
+
+let current=0
+
+function startGame(){
+showQuestion()
+}
+
+function showQuestion(){
+
+let q=questions[current]
+
+document.getElementById("question").innerText=q.q
+
+let html=""
+
+q.a.forEach((ans,i)=>{
+
+html+=`<button class="answer" onclick="answer(${i})">${ans}</button>`
+
+})
+
+document.getElementById("answers").innerHTML=html
+
+}
+
+function answer(i){
+
+let q=questions[current]
+
+if(i==q.c){
+alert("Правильно")
+}else{
+alert("Неправильно")
+}
+
+current++
+
+if(current>=questions.length){
+alert("Игра закончена")
+current=0
+}
+
+showQuestion()
+
+}
+
+</script>
+
+</body>
+</html>
